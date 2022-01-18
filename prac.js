@@ -1,3 +1,5 @@
+
+
 // 1
 // 이 문제에는 표준 입력으로 두 개의 정수 n과 m이 주어집니다.
 // 별(*) 문자를 이용해 가로의 길이가 n, 세로의 길이가 m인 직사각형 형태를 출력해보세요.
@@ -15,6 +17,18 @@
 //         }
 //         console.log(star);
 //     }    
+// });
+// 다른사람풀이
+// process.stdin.setEncoding('utf8');
+// process.stdin.on('data', data => {
+//     const n = data.split(" ");
+//     const a = Number(n[0]), b = Number(n[1]);
+//     // 별 문자열을 a번 반복한 값을 리턴한다.
+//     const row = '*'.repeat(a)
+//     for(let i =0; i < b; i++){
+//         console.log(row)
+//     }
+
 // });
 
 
@@ -44,6 +58,11 @@
 //     return answer;
 // }
 // solution('1111331111')
+// 다른사람풀이
+// function solution(s) {
+//     return s.substr(Math.ceil(s.length / 2) - 1, s.length % 2 === 0 ? 2 : 1);
+// }
+// console.log(solution('asdasdasd'))
 
 
 
@@ -74,6 +93,13 @@
 //     return answer;
 // }
 // solution(5,3)
+// 다른사람풀이
+function adder(a, b){
+    var result = 0
+
+    return (a+b)*(Math.abs(b-a)+1)/2;
+}
+console.log(adder(3,5));
 
 
 
@@ -344,6 +370,11 @@
 //     return answer;
 // }
 // console.log(solution([-1,0,1], [1,0,-1]))
+// 다른사람 풀이
+// function solution(a, b) {
+//     return a.reduce((acc, _, i) => acc += a[i] * b[i], 0);
+// }
+// console.log(solution([-1,0,1], [1,0,-1]))
 
 
 
@@ -378,6 +409,12 @@
 //     return answer;
 // }
 // console.log(solution("Pyy"));
+// 다른사람 풀이
+// function numPY(s){
+//     //함수를 완성하세요
+//     return s.toUpperCase().split("P").length === s.toUpperCase().split("Y").length;
+// }
+// console.log(numPY('Pyy'))
 
 
 
@@ -660,6 +697,162 @@
 //     return answer;
 // }
 // console.log(solution(13));
+
+
+
+// 29
+// 문제 설명
+// 자연수 n이 매개변수로 주어집니다. n을 3진법 상에서 앞뒤로 뒤집은 후, 이를 다시 10진법으로 표현한 수를 return 하도록 solution 함수를 완성해주세요.
+
+// 제한사항
+// n은 1 이상 100,000,000 이하인 자연수입니다.
+
+// function solution(n) {
+//     var answer = 0;
+
+//     answer = n.toString(3).split("").reverse().join("");
+
+//     return parseInt(answer, 3);
+// }
+// console.log(solution(125));
+
+
+
+// 30
+// 문제 설명
+// 명함 지갑을 만드는 회사에서 지갑의 크기를 정하려고 합니다. 다양한 모양과 크기의 명함들을 모두 수납할 수 있으면서, 작아서 들고 다니기 편한 지갑을 만들어야 합니다. 이러한 요건을 만족하는 지갑을 만들기 위해 디자인팀은 모든 명함의 가로 길이와 세로 길이를 조사했습니다.
+
+// 아래 표는 4가지 명함의 가로 길이와 세로 길이를 나타냅니다.
+
+// 명함 번호	가로 길이	세로 길이
+// 1	60	50
+// 2	30	70
+// 3	60	30
+// 4	80	40
+// 가장 긴 가로 길이와 세로 길이가 각각 80, 70이기 때문에 80(가로) x 70(세로) 크기의 지갑을 만들면 모든 명함들을 수납할 수 있습니다. 하지만 2번 명함을 가로로 눕혀 수납한다면 80(가로) x 50(세로) 크기의 지갑으로 모든 명함들을 수납할 수 있습니다. 이때의 지갑 크기는 4000(=80 x 50)입니다.
+
+// 모든 명함의 가로 길이와 세로 길이를 나타내는 2차원 배열 sizes가 매개변수로 주어집니다. 모든 명함을 수납할 수 있는 가장 작은 지갑을 만들 때, 지갑의 크기를 return 하도록 solution 함수를 완성해주세요.
+// function solution(sizes) {
+//     var answer = 0;
+   
+//     let w = sizes.map((item, index) => {
+//         return item[0] < item[1] ? item[1] : item[0];
+//     });
+
+//     let h = sizes.map((item, index) => {
+//         return item[0] < item[1] ? item[0] : item[1];
+//     });
+
+//     answer = Math.max(...w) * Math.max(...h);
+    
+//     return answer;
+// }
+// console.log(solution([[60, 50], [30, 70], [60, 30], [80, 40]]))
+
+
+
+// 31
+// 문제 설명
+// 배열 arr가 주어집니다. 배열 arr의 각 원소는 숫자 0부터 9까지로 이루어져 있습니다. 이때, 배열 arr에서 연속적으로 나타나는 숫자는 하나만 남기고 전부 제거하려고 합니다. 단, 제거된 후 남은 수들을 반환할 때는 배열 arr의 원소들의 순서를 유지해야 합니다. 예를 들면,
+
+// arr = [1, 1, 3, 3, 0, 1, 1] 이면 [1, 3, 0, 1] 을 return 합니다.
+// arr = [4, 4, 4, 3, 3] 이면 [4, 3] 을 return 합니다.
+// 배열 arr에서 연속적으로 나타나는 숫자는 제거하고 남은 수들을 return 하는 solution 함수를 완성해 주세요.
+
+// 제한사항
+// 배열 arr의 크기 : 1,000,000 이하의 자연수
+// 배열 arr의 원소의 크기 : 0보다 크거나 같고 9보다 작거나 같은 정수
+// function solution(arr)
+// {
+//     var answer = arr.filter((item, index) => {
+//         // console.log(arr[index+1], item)
+//         return arr[index+1] !== item;
+//     });
+
+//     return answer;
+// }
+// console.log(solution([1,1,3,3,0,1,1]));
+
+
+
+// 32
+// 문제 설명
+// 정수 배열 numbers가 주어집니다. numbers에서 서로 다른 인덱스에 있는 두 개의 수를 뽑아 더해서 만들 수 있는 모든 수를 배열에 오름차순으로 담아 return 하도록 solution 함수를 완성해주세요.
+
+// 제한사항
+// numbers의 길이는 2 이상 100 이하입니다.
+// numbers의 모든 수는 0 이상 100 이하입니다.
+
+// function solution(numbers) {
+//     var answer = [];
+    
+//     let result = [];
+//     for(let i=0; i<numbers.length; i++){
+//         for(let j=i+1; j<numbers.length; j++){
+//             if(result.indexOf(numbers[i]+numbers[j]) === -1) {
+//                 result.push(numbers[i]+numbers[j]);
+//             }
+//         }
+//     }
+
+//     return result.sort((a, b) => a-b);
+// }
+// console.log(solution([2,1,3,4,1]))
+
+
+
+// 33
+// 문제 설명
+// 로또 6/45(이하 '로또'로 표기)는 1부터 45까지의 숫자 중 6개를 찍어서 맞히는 대표적인 복권입니다. 아래는 로또의 순위를 정하는 방식입니다. 1
+
+// 순위	당첨 내용
+// 1	6개 번호가 모두 일치
+// 2	5개 번호가 일치
+// 3	4개 번호가 일치
+// 4	3개 번호가 일치
+// 5	2개 번호가 일치
+// 6(낙첨)	그 외
+// 로또를 구매한 민우는 당첨 번호 발표일을 학수고대하고 있었습니다. 하지만, 민우의 동생이 로또에 낙서를 하여, 일부 번호를 알아볼 수 없게 되었습니다. 당첨 번호 발표 후, 민우는 자신이 구매했던 로또로 당첨이 가능했던 최고 순위와 최저 순위를 알아보고 싶어 졌습니다.
+// 알아볼 수 없는 번호를 0으로 표기하기로 하고, 민우가 구매한 로또 번호 6개가 44, 1, 0, 0, 31 25라고 가정해보겠습니다. 당첨 번호 6개가 31, 10, 45, 1, 6, 19라면, 당첨 가능한 최고 순위와 최저 순위의 한 예는 아래와 같습니다.
+
+// 당첨 번호	31	10	45	1	6	19	결과
+// 최고 순위 번호	31	0→10	44	1	0→6	25	4개 번호 일치, 3등
+// 최저 순위 번호	31	0→11	44	1	0→7	25	2개 번호 일치, 5등
+// 순서와 상관없이, 구매한 로또에 당첨 번호와 일치하는 번호가 있으면 맞힌 걸로 인정됩니다.
+// 알아볼 수 없는 두 개의 번호를 각각 10, 6이라고 가정하면 3등에 당첨될 수 있습니다.
+// 3등을 만드는 다른 방법들도 존재합니다. 하지만, 2등 이상으로 만드는 것은 불가능합니다.
+// 알아볼 수 없는 두 개의 번호를 각각 11, 7이라고 가정하면 5등에 당첨될 수 있습니다.
+// 5등을 만드는 다른 방법들도 존재합니다. 하지만, 6등(낙첨)으로 만드는 것은 불가능합니다.
+// 민우가 구매한 로또 번호를 담은 배열 lottos, 당첨 번호를 담은 배열 win_nums가 매개변수로 주어집니다. 이때, 당첨 가능한 최고 순위와 최저 순위를 차례대로 배열에 담아서 return 하도록 solution 함수를 완성해주세요
+
+// function solution(lottos, win_nums) {
+//     var answer = [];
+//     return answer;
+// }
+// console.log(solution());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

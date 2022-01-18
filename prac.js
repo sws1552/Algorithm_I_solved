@@ -1,3 +1,5 @@
+// 문제를 풀어보며 repeat(), reduce(), map(), filter() 함수를 알게 되었다.
+
 
 
 // 1
@@ -94,12 +96,12 @@
 // }
 // solution(5,3)
 // 다른사람풀이
-function adder(a, b){
-    var result = 0
-
-    return (a+b)*(Math.abs(b-a)+1)/2;
-}
-console.log(adder(3,5));
+// function adder(a, b){
+//     var result = 0
+//     // 절대값 구하는 abs 함수
+//     return (a+b)*(Math.abs(b-a)+1)/2;
+// }
+// console.log(adder(3,5));
 
 
 
@@ -143,6 +145,15 @@ console.log(adder(3,5));
 //     return answer;
 // }
 // solution([1,2,3,4,6,7,8,0])
+// 다른사람풀이
+// function solution(numbers) {
+//     // 누산기가 포함되어 있기에 누적된 값을 출력할때 용이하다. (acc가 누산기, cur이 처리할 현재요소)
+//     // 0~9 더한값에서 numbers안에 요소들의 합을 뺀다.
+//     return 45 - numbers.reduce((acc, cur) => {
+//         return acc + cur
+//     }, 0);
+// }
+// console.log(solution([1,2,3,4,6,7,8,0]))
 
 
 
@@ -172,6 +183,12 @@ console.log(adder(3,5));
 //     return answer;
 // }
 // solution([1,2,3], [false,false,true]);
+// 다른사람풀이
+// function solution(absolutes, signs) {
+//     // signs[i]가 true면 val에 1곱해서 양수, false이면 -1곱해서 음수
+//     return absolutes.reduce((acc, val, i) => acc + (val * (signs[i] ? 1 : -1)), 0);
+// }
+// console.log(solution([1,2,3], [false,false,true]));
 
 
 
@@ -194,6 +211,11 @@ console.log(adder(3,5));
 //     return answer;
 // }
 // console.log(solution([1,2,3,4]));
+// 다른사람풀이
+// function average(array){
+//     return array.reduce((a, b) => a + b) / array.length;
+// }
+// console.log(average([1,2,3,4]));
 
 
 
@@ -217,6 +239,14 @@ console.log(adder(3,5));
 //     return answer + laststr;
 // }
 // console.log(solution("027778888"));
+// 다른사람풀이
+// function hide_numbers(s){
+//     // repeat함수로 뒤에 4자리빼고 *을 붙힌거와 뒤에 4자리를 더한다.
+//     var result = "*".repeat(s.length - 4) + s.slice(-4);
+//     return result;
+// }
+// console.log(hide_numbers("027778888"))
+
 
 
 
@@ -245,7 +275,11 @@ console.log(adder(3,5));
 //     return answer;
 // }
 // console.log(solution([[1,2],[2,3]],[[3,4],[5,6]]));
-
+// 다른사람풀이
+// function sumMatrix(A,B){
+//     return A.map((a,i) => a.map((b, j) => b + B[i][j]));
+// }
+// console.log(sumMatrix([[1,2],[2,3]],[[3,4],[5,6]]));
 
 
 // 11
@@ -346,7 +380,13 @@ console.log(adder(3,5));
 //     return answer.sort(function(a,b){return a-b;});
 // }
 // console.log(solution([5, 9, 7, 10], 5));
-
+// 다른사람풀이
+// function solution(arr, divisor) {
+//     // filter 함수를 사용해서 arr요소가 divisor로 나누어떨어지는 요소만 있는 배열을 만든다.
+//     var answer = arr.filter(v => v%divisor == 0);
+//     return answer.length == 0 ? [-1] : answer.sort((a,b) => a-b);
+// }
+// console.log(solution([5, 9, 7, 10], 5))
 
 
 
@@ -468,7 +508,7 @@ console.log(adder(3,5));
 
 //     let result = answer.repeat(n);
 
-//     return result.substring(0,result.length-n);;
+//     return result.substring(0,n);;
 // }
 // console.log(solution(7))
 
@@ -827,13 +867,61 @@ console.log(adder(3,5));
 
 // function solution(lottos, win_nums) {
 //     var answer = [];
+
+//     const rank = [6,6,5,4,3,2,1];
+    
+//     let num = lottos.filter((item, index) => win_nums.includes(item)).length;
+        
+//     let num0 = lottos.filter((item, index) => item === 0).length;
+    
+//     let max = num+num0;
+    
+//     return [rank[max], rank[num]];
+// }
+// console.log(solution([44, 1, 0, 0, 31, 25], [31, 10, 45, 1, 6, 19]));
+
+
+
+// 34
+// 문제 설명
+// 수포자는 수학을 포기한 사람의 준말입니다. 수포자 삼인방은 모의고사에 수학 문제를 전부 찍으려 합니다. 수포자는 1번 문제부터 마지막 문제까지 다음과 같이 찍습니다.
+
+// 1번 수포자가 찍는 방식: 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, ...
+// 2번 수포자가 찍는 방식: 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5, ...
+// 3번 수포자가 찍는 방식: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, ...
+
+// 1번 문제부터 마지막 문제까지의 정답이 순서대로 들은 배열 answers가 주어졌을 때, 가장 많은 문제를 맞힌 사람이 누구인지 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+// 제한 조건
+// 시험은 최대 10,000 문제로 구성되어있습니다.
+// 문제의 정답은 1, 2, 3, 4, 5중 하나입니다.
+// 가장 높은 점수를 받은 사람이 여럿일 경우, return하는 값을 오름차순 정렬해주세요.
+
+// function solution(answers) {
+
+//     let answer = [];
+
+//     const man1 = [1, 2, 3, 4, 5];
+//     const man2 = [2, 1, 2, 3, 2, 4, 2, 5];
+//     const man3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+
+//     let score = [0, 0, 0];
+
+//     for (let i = 0; i < answers.length; i++) {
+//         if (answers[i] === man1[i % man1.length]) score[0]++;
+//         if (answers[i] === man2[i % man2.length]) score[1]++;
+//         if (answers[i] === man3[i % man3.length]) score[2]++;
+//     }
+
+//     const max = Math.max(...score);
+
+//     for (let i = 0; i < score.length; i++) {
+//         if (max === score[i]) answer.push(i + 1);
+//     }
+
 //     return answer;
 // }
-// console.log(solution());
-
-
-
-
+// console.log(solution([1,2,3,4,5]));
 
 
 

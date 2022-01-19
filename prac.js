@@ -1,5 +1,46 @@
 // 문제를 풀어보며 repeat(), reduce(), map(), filter() 함수를 알게 되었다.
 
+// reduce()
+// 인자값은 callback [, initivalValue]
+// callback은 previouseValue, currentValue, currentIndex, array
+// [, initivalValue]는 옵션
+// reduce()는 위의 map, find, filter 대체 가능
+
+// let arr = [9, 2, 8, 5, 7]
+// let sum = arr.reduce((pre, val) => pre + val)
+// console.log(sum)	// 31
+
+// // map
+// var arr = ['foo', 'hello', 'diamond', 'A']
+// var arr2 = arr.reduce((pre, value) => {
+//     if(value.length >= 5){
+//         pre.push(value)
+//     }
+//     return pre
+// }, [])
+// console.log(arr2)   // [3, 5, 7, 1]
+
+// // filter
+// var arr = [4, 15, 377, 395, 400, 1024, 3000]
+// var arr2 = arr.reduce((pre, value) => {
+//     if (value % 5 == 0) {
+//         pre.push(value);
+//     }
+//     return pre;
+// }, []);
+// console.log(arr2)    // [15, 395, 400, 3000]
+
+// // find
+// var arr = [4, 15, 377, 395, 400, 1024, 3000]
+// var arr2 = arr.reduce((pre, value) => {
+//     if (typeof pre == 'undefined' && value % 5 == 0) {
+//         pre = value;
+//     }
+//     return pre;
+// }, undefined);
+// console.log(arr2)  // 15
+
+
 
 
 // 1
@@ -555,6 +596,8 @@
 
 //     let word = s.split(' ');
 
+//     console.log(word)
+
 //     word.forEach((item,index) => {
 //         item += ' ';
 //         for(let i=0; i<item.length; i++){
@@ -624,7 +667,9 @@
 // n은 1이상 8000000000 이하인 자연수입니다.
 // function solution(n) {
 //     var answer = [];
+
 //     let str = n.toString();
+    
 //     for(let i=0; i<str.length; i++){
 //         answer.push(str[i]);
 //     }
@@ -672,7 +717,6 @@
 //     answer = arr.filter((item) => {
 //         return item !== minVal;
 //     });
-
     
 
 //     return answer.length === 0 ? answer.concat(-1) : answer;
@@ -925,11 +969,52 @@
 
 
 
+// 35
+// 문제 설명
+// 문자열로 구성된 리스트 strings와, 정수 n이 주어졌을 때, 각 문자열의 인덱스 n번째 글자를 기준으로 오름차순 정렬하려 합니다. 예를 들어 strings가 ["sun", "bed", "car"]이고 n이 1이면 각 단어의 인덱스 1의 문자 "u", "e", "a"로 strings를 정렬합니다.
+
+// 제한 조건
+// strings는 길이 1 이상, 50이하인 배열입니다.
+// strings의 원소는 소문자 알파벳으로 이루어져 있습니다.
+// strings의 원소는 길이 1 이상, 100이하인 문자열입니다.
+// 모든 strings의 원소의 길이는 n보다 큽니다.
+// 인덱스 1의 문자가 같은 문자열이 여럿 일 경우, 사전순으로 앞선 문자열이 앞쪽에 위치합니다.
+
+// function solution(strings, n) {
+//     var answer = [];
+    
+//     strings.sort(function(a,b){
+//         var first = a[n];
+//         console.log(first)
+//         var second = b[n];
+//         console.log(second)
+//         if(first === second){
+//             return (a > b) - (a < b);
+//         }else{
+//             return (first > second) - (first < second);
+//         }
+//     })
+
+    
+//     return strings;
+// }
+// console.log(solution(["sun", "bed", "car"], 1));
 
 
 
+// 36
+// 문제 설명
+// 문자열 s에 나타나는 문자를 큰것부터 작은 순으로 정렬해 새로운 문자열을 리턴하는 함수, solution을 완성해주세요.
+// s는 영문 대소문자로만 구성되어 있으며, 대문자는 소문자보다 작은 것으로 간주합니다.
 
+// 제한 사항
+// str은 길이 1 이상인 문자열입니다.
 
+// function solution(s) {
+
+//     return s.split('').sort().reverse().join('');
+// }
+// console.log(solution("Zbcdefg"));
 
 
 

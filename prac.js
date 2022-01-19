@@ -53,13 +53,11 @@
 // process.stdin.on('data', data => {
 //     const n = data.split(" ");
 //     const a = Number(n[0]), b = Number(n[1]);
+   
 //     for(let i=0; i<b; i++){
-//         let star = "";
-//         for(let j=0; j<a; j++){
-//             star += '*'
-//         }
-//         console.log(star);
-//     }    
+//         console.log('*'.repeat(a));
+//     }
+
 // });
 // 다른사람풀이
 // process.stdin.setEncoding('utf8');
@@ -96,11 +94,12 @@
 // 재한사항
 // s는 길이가 1 이상, 100이하인 스트링입니다.
 // function solution(s) {
-//     let answer = s.length%2 == 0 ? s.slice(s.length/2-1, s.length/2+1) : s.charAt(s.length/2, 1) ;
+    
+//     let answer = s.length%2 === 0 ? s.substr(s.length/2-1, 2) : s.substr(s.length/2,1);
     
 //     return answer;
 // }
-// solution('1111331111')
+// console.log(solution('1111341111'))
 // 다른사람풀이
 // function solution(s) {
 //     return s.substr(Math.ceil(s.length / 2) - 1, s.length % 2 === 0 ? 2 : 1);
@@ -135,7 +134,7 @@
 
 //     return answer;
 // }
-// solution(5,3)
+// console.log(solution(5,3))
 // 다른사람풀이
 // function adder(a, b){
 //     var result = 0
@@ -170,22 +169,13 @@
 // numbers의 모든 수는 서로 다릅니다.
 // function solution(numbers) {
 
-//     let sum = 0;
-//     let sum2 = 0;
-//     for(let i=0; i<=9; i++){
-//       sum2 += i;
-//       for(let j=0; j<numbers.length; j++){
-//         if(i == numbers[j]){
-//           sum += i;
-//         }        
-//       }
-//     }
+//     let answer = numbers.reduce((acc, item) => {
+//         return (acc+item);
+//     },0);
 
-//     let answer = sum2-sum;
-
-//     return answer;
+//     return 45-answer;
 // }
-// solution([1,2,3,4,6,7,8,0])
+// console.log(solution([1,2,3,4,6,7,8,0]))
 // 다른사람풀이
 // function solution(numbers) {
 //     // 누산기가 포함되어 있기에 누적된 값을 출력할때 용이하다. (acc가 누산기, cur이 처리할 현재요소)
@@ -212,18 +202,18 @@
 // function solution(absolutes, signs) {
 //     var answer = 0;
 
-//     for(let i=0; i<absolutes.length; i++){
-//       if(signs[i] == false) {
-//          absolutes[i] *= -1
-//       }
-
-//       answer += absolutes[i]
-
-//     }
+//     answer = absolutes.reduce((acc, item, index) => {
+//         if(!signs[index]){
+//             acc += (item*-1);
+//         }else {
+//             acc += item;
+//         }
+//         return acc
+//     }, 0);
 
 //     return answer;
 // }
-// solution([1,2,3], [false,false,true]);
+// console.log(solution([4,7,12], [true,false,true]));
 // 다른사람풀이
 // function solution(absolutes, signs) {
 //     // signs[i]가 true면 val에 1곱해서 양수, false이면 -1곱해서 음수
@@ -243,13 +233,10 @@
 // arr의 원소는 -10,000 이상 10,000 이하인 정수입니다.
 // function solution(arr) {
 //     var answer = 0;
-//     let sum = 0;
-//     arr.forEach((item, index) => {
-//       sum += item;
-//     });
-//       answer = sum/arr.length;
+    
+//     answer = arr.reduce((acc, item) => acc += item);
 
-//     return answer;
+//     return answer/arr.length;
 // }
 // console.log(solution([1,2,3,4]));
 // 다른사람풀이
@@ -271,13 +258,10 @@
 // function solution(phone_number) {
 //     var answer = '';
 
-//     let laststr = phone_number.slice(phone_number.length-4, phone_number);
-//     let str = '';
-//     for(let i=0; i<phone_number.length-4; i++){
-//         answer += '*'
-//     }
+//     let star = '*'.repeat(phone_number.length-4);
+//     let number4 = phone_number.substr(phone_number.length-4, 4);
 
-//     return answer + laststr;
+//     return star+number4;
 // }
 // console.log(solution("027778888"));
 // 다른사람풀이
@@ -306,9 +290,9 @@
 //         answer.push([]);
 //         for(let j=0; j<arr1[i].length; j++){
 //             answer[i].push(arr1[i][j]+arr2[i][j]);
-//             console.log(arr1[i][j])
-//             console.log(arr2[i][j])
-//             console.log(arr1[i][j]+arr2[i][j])
+//             // console.log(arr1[i][j])
+//             // console.log(arr2[i][j])
+//             // console.log(arr1[i][j]+arr2[i][j])
 //             // console.log(answer);
 //         }
 //     }
@@ -408,19 +392,14 @@
 // function solution(arr, divisor) {
 //     var answer = [];
 
+//     answer = arr.reduce((acc, item) => {
+//         if(item%divisor === 0) acc.push(item);
+//         return acc;
+//     }, [])
 
-//     for(let i=0; i<arr.length; i++){
-//         if(arr[i]%divisor == 0) answer.push(arr[i]);
-//     }
-
-//     answer.length == 0 ? answer.push(-1) : answer;
-
-//     // 첫 번째 인수가 두 번째 인수보다 작을 경우 - 값
-//     // 두 인수가 같을 경우 0
-//     // 첫 번째 인수가 두 번째 인수보다 클 경우 + 값
-//     return answer.sort(function(a,b){return a-b;});
+//     return answer.length !== 0 ? answer.sort((a,b) => a-b) : answer.concat(-1);
 // }
-// console.log(solution([5, 9, 7, 10], 5));
+// console.log(solution([2, 36, 1, 3], 1));
 // 다른사람풀이
 // function solution(arr, divisor) {
 //     // filter 함수를 사용해서 arr요소가 divisor로 나누어떨어지는 요소만 있는 배열을 만든다.
@@ -444,9 +423,10 @@
 // function solution(a, b) {
 //     var answer = 0;
 
-//     for(let i=0; i<a.length; i++){
-//         answer += a[i]*b[i]
-//     }
+//     answer = a.reduce((acc, item, index) => {
+//         acc += item * b[index]
+//         return acc
+//     }, 0)
 
 //     return answer;
 // }
@@ -470,24 +450,11 @@
 // 문자열 s는 알파벳으로만 이루어져 있습니다.
 
 // function solution(s){
-//     var answer = true;
 
-//     let small = s.toLowerCase();
-//     let p = [];
-//     let y = [];
-//     for(let i=0; i<small.length; i++){
-
-//         if(small.charAt(i) == 'p'){
-//             p.push(small.charAt(i));
-//         }else if(small.charAt(i) == 'y'){
-//             y.push(small.charAt(i));
-//         }
-
-//     }
-
-//     answer = p.length === y.length ? true : false ;
-
-//     return answer;
+//     let p = s.toLowerCase().split('p').length;
+//     let y = s.toLowerCase().split('y').length;
+    
+//     return p === y;
 // }
 // console.log(solution("Pyy"));
 // 다른사람 풀이
@@ -509,12 +476,12 @@
 
 // function solution(s) {
 //     var answer = true;
-
-//     answer = (s.length === 4 || s.length === 6) && s == parseInt(s)
+        //  == 은 데이터 타입까지 판별하지 않는다.
+//     answer = (s.length === 4 || s.length === 6) && parseInt(s) == s;
 
 //     return answer;
 // }
-// console.log(solution("1234"));
+// console.log(solution("a1234"));
 
 
 
@@ -545,13 +512,13 @@
 // n은 길이 10,000이하인 자연수입니다.
 
 // function solution(n) {
-//     var answer = '수박';
+//     let answer = '수박';
 
-//     let result = answer.repeat(n);
-
-//     return result.substring(0,n);;
+//     let str = answer.repeat(n);
+    
+//     return str.substring(0,str.length-n);
 // }
-// console.log(solution(7))
+// console.log(solution(3))
 
 
 
@@ -568,18 +535,20 @@
 // 참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
 // 참가자 중에는 동명이인이 있을 수 있습니다.
 
-// 어이가 없네 ;;;;;;;;;;;
+
 // function solution(participant, completion) {
 
 //     participant.sort()
 //     completion.sort()
+   
 //     for(let i=0; i<participant.length; i++){
-//         if(completion[i] !== participant[i]){
+//         if(participant[i] !== completion[i]){
 //             return participant[i];
 //         }
 //     }
+
 // }
-// console.log(solution(["marina", "josipa", "nikola", "vinko", "filipa"], ["josipa", "filipa", "marina", "nikola"]));
+// console.log(solution(["mislav", "stanko", "mislav", "ana"], ["stanko", "ana", "mislav"]));
 
 
 
@@ -592,20 +561,25 @@
 // 첫 번째 글자는 0번째 인덱스로 보아 짝수번째 알파벳으로 처리해야 합니다.
 
 // function solution(s) {
-//     var answer = '';
 
-//     let word = s.split(' ');
+//     let arr = s.split(' ');
+//     let str = '';
 
-//     console.log(word)
-
-//     word.forEach((item,index) => {
+//     arr.forEach((item, i)=> {
 //         item += ' ';
-//         for(let i=0; i<item.length; i++){
-//             answer += i%2 == 0 ? item[i].toUpperCase() : item[i].toLowerCase();
+//         for(let j=0; j<item.length; j++){
+//             if(j%2 === 0){
+//                 str += item[j].toUpperCase();
+//             }else {
+//                 str += item[j].toLowerCase();
+//             }
 //         }
+        
 //     });
 
-//     return answer.substring(0,answer.length-1);
+    
+
+//     return str.slice(0, str.length-1);
 // }
 // console.log(solution("song won seok"))
 
@@ -623,15 +597,14 @@
 
 // function solution(n)
 // {
-//     var answer = 0;
-    
-//     let str = n.toString();
-
+//     let str = String(n);
+//     let result = 0;
 //     for(let i=0; i<str.length; i++){
-//         answer += parseInt(str[i])
-//     }  
+//         result += parseInt(str[i]);
+//     }
+    
 
-//     return answer;
+//     return result;
 // }
 // console.log(solution(123));
 
@@ -645,15 +618,15 @@
 // n은 10,000,000,000이하인 자연수입니다.
 
 // function solution(n) {
-//     var answer = [];
 
-//     let str = n.toString();
+//     let str = String(n).split('');
 
-//     for(let i=0; i<str.length; i++){
-//         answer.push(parseInt(str[i]))
-//     }
+//     let result = str.reduce((acc, item) => {
+//         acc.push(parseInt(item)) 
+//         return acc;
+//     }, []);
 
-//     return answer.reverse();
+//     return result.reverse();
 // }
 // console.log(solution(12345));
 
@@ -668,15 +641,9 @@
 // function solution(n) {
 //     var answer = [];
 
-//     let str = n.toString();
-    
-//     for(let i=0; i<str.length; i++){
-//         answer.push(str[i]);
-//     }
+//     let str = String(n).split('').sort((a,b) => b-a).join('');
 
-//     str = answer.sort((a, b) => b - a).join('');
-
-//     return parseInt(str);
+//     return +str;
 // }
 // console.log(solution(118372))
 
@@ -712,16 +679,24 @@
 // function solution(arr) {
 //     var answer = [];
 
+//     // 전개 연산자 (...) : 배열 또는 객체를 하나하나 넘기는 용도로 사용된다.
+//     console.log(...arr)
 //     let minVal = Math.min(...arr)
-
-//     answer = arr.filter((item) => {
-//         return item !== minVal;
-//     });
+//     console.log(minVal)
     
+//     // reduce() : 파라미터에 누산기, 배열의현재요소, 인덱스 가 들어간다.
+//     // reduce() 는 acc를 리턴한다.
+//     answer = arr.reduce((acc,item) => {
+//         if(item !== minVal){
+//             acc.push(item)
+//         }
+//         return acc;
+//     }, []);
 
+//     // concat() = 배열에 요소를 추가해서 새로운배열로 리턴한다.
 //     return answer.length === 0 ? answer.concat(-1) : answer;
 // }
-// console.log(solution([4,3,2,1]));
+// console.log(solution([1]));
 
 
 
@@ -741,20 +716,19 @@
 //     var answer = 0;
 
 //     let count = 0;
+
 //     for(let i=0; i<500; i++){
 //         if(num !== 1){
+//             count+=1
 //             if(num%2 === 0){
-//                 num/=2;
-//             }else {
+//                 num = num/2;
+//             }else{
 //                 num = num*3+1;
 //             }
-//             count += 1;
 //         }
 //     }
     
-//     answer = count !== 500 ? count : -1;
-
-//     return answer;
+//     return count === 500 ? -1 : count;
 // }
 // console.log(solution(6));
 
@@ -770,15 +744,12 @@
 
 // function solution(x) {
 //     var answer = true;
-//     let sum = 0;
-//     let str = x.toString();
-//     for(let i=0; i<str.length; i++){
-//         sum += parseInt(str[i])
-//     }
 
-//     answer = x%sum === 0 ? true : false;
+//     let arr = String(x).split('');
 
-//     return answer;
+//     answer = arr.map((item) => parseInt(item)).reduce((acc, item) => acc += item);
+
+//     return x%answer === 0 ? true : false;
 // }
 // console.log(solution(13));
 

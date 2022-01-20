@@ -30,16 +30,6 @@
 // }, []);
 // console.log(arr2)    // [15, 395, 400, 3000]
 
-// // find
-// var arr = [4, 15, 377, 395, 400, 1024, 3000]
-// var arr2 = arr.reduce((pre, value) => {
-//     if (typeof pre == 'undefined' && value % 5 == 0) {
-//         pre = value;
-//     }
-//     return pre;
-// }, undefined);
-// console.log(arr2)  // 15
-
 
 
 
